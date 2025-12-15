@@ -2,10 +2,12 @@
 
 *{box-sizing:border-box}
 
-.html, body {height:100%;}
+html, body {height:100%;}
 body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#eef5ff 0%,var(--bg) 100%);color:#082136;min-height:100vh}
 
-.container{width:100%;max-width:1200px;margin:0 auto;padding:clamp(12px,2.5vw,32px)}
+/* Root and container use flex column so main can grow to fill available space */
+#root{min-height:100vh;display:flex;flex-direction:column}
+.container{width:100%;max-width:1400px;margin:0 auto;padding:clamp(12px,2.5vw,36px);display:flex;flex-direction:column;min-height:100vh}
 
 header{display:flex;align-items:center;gap:18px}
 header .brand{display:flex;flex-direction:column}
@@ -23,6 +25,9 @@ header p{margin:4px 0 0;color:var(--muted)}
 .hero p{margin:0;color:var(--muted)}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px;align-items:start}
+
+main{flex:1;display:flex;flex-direction:column}
+.grid{flex:0 0 auto}
 .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(11,39,64,0.06);transition:transform .18s ease,box-shadow .18s ease}
 .card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(11,39,64,0.12)}
 .card h3{margin:0 0 8px;font-size:17px}
