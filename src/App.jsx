@@ -41,7 +41,7 @@ function TrialCard({ trial }) {
         <div>📍 {trial.location}</div>
       </div>
 
-      <p className="desc">This study is recruiting participants. Eligibility and details available on request.</p>
+      <p className="desc"></p>
 
       <div className="cta">
         <button className="btn">Apply</button>
