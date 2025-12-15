@@ -1,29 +1,29 @@
 import React, { useState, useMemo, useEffect } from 'react'
 
 const SAMPLE_TRIALS = [
-  { id: 1, title: 'Diabetes Glucose Control Study', phase: 'Phase 2', location: 'New York, NY' },
-  { id: 2, title: 'Hypertension Medication Trial', phase: 'Phase 3', location: 'Boston, MA' },
-  { id: 3, title: 'COVID-19 Vaccine Follow-up', phase: 'Phase 4', location: 'San Francisco, CA' },
-  { id: 4, title: 'Alzheimer Progression Biomarker Study', phase: 'Phase 2', location: 'Seattle, WA' },
-  { id: 5, title: 'Chronic Pain Neuromodulation Trial', phase: 'Phase 3', location: 'Chicago, IL' },
-  { id: 6, title: 'Asthma Inhaler Efficacy Study', phase: 'Phase 2', location: 'Denver, CO' },
-  { id: 7, title: 'Rheumatoid Arthritis New Agent', phase: 'Phase 3', location: 'Houston, TX' },
-  { id: 8, title: 'Breast Cancer Adjuvant Therapy', phase: 'Phase 4', location: 'Los Angeles, CA' },
-  { id: 9, title: 'Osteoporosis Bone Density Trial', phase: 'Phase 3', location: 'Minneapolis, MN' },
-  { id: 10, title: 'Migraine Preventative Study', phase: 'Phase 1', location: 'Philadelphia, PA' },
-  { id: 11, title: 'Parkinson Symptom Management Study', phase: 'Phase 3', location: 'San Diego, CA' },
-  { id: 12, title: 'Depression Digital Therapeutic Trial', phase: 'Phase 2', location: 'Austin, TX' },
-  { id: 13, title: 'Cholesterol Reduction Combination Study', phase: 'Phase 4', location: 'Phoenix, AZ' },
-  { id: 14, title: 'Hepatitis C Treatment Optimization', phase: 'Phase 3', location: 'Atlanta, GA' },
-  { id: 15, title: 'Pediatric Vaccination Safety Study', phase: 'Phase 2', location: 'Columbus, OH' },
-  { id: 16, title: 'Multiple Sclerosis Remission Trial', phase: 'Phase 3', location: 'Cleveland, OH' },
-  { id: 17, title: 'Influenza Next-Gen Vaccine Study', phase: 'Phase 4', location: 'Orlando, FL' },
-  { id: 18, title: 'Obesity Metabolic Intervention', phase: 'Phase 3', location: 'Nashville, TN' },
-  { id: 19, title: 'Dermatology Topical Agent Study', phase: 'Phase 1', location: 'Portland, OR' },
-  { id: 20, title: 'Chronic Kidney Disease Progression Study', phase: 'Phase 3', location: 'Detroit, MI' },
-  { id: 21, title: 'Sleep Apnea Device Trial', phase: 'Phase 2', location: 'San Antonio, TX' },
-  { id: 22, title: 'Ovarian Cancer Maintenance Therapy', phase: 'Phase 3', location: 'Richmond, VA' },
-  { id: 23, title: 'Rare Genetic Disorder Natural History', phase: 'Phase 4', location: 'Raleigh, NC' }
+  { id: 1, title: 'Diabetes Glucose Control Study', phase: 'Phase 2', location: 'New York, NY', description: 'Evaluates glucose control strategies and device monitoring in adults with Type 2 diabetes.' },
+  { id: 2, title: 'Hypertension Medication Trial', phase: 'Phase 3', location: 'Boston, MA', description: 'Comparing a new antihypertensive combination against standard of care for blood pressure control.' },
+  { id: 3, title: 'COVID-19 Vaccine Follow-up', phase: 'Phase 4', location: 'San Francisco, CA', description: 'Long-term safety and effectiveness follow-up of an authorized COVID-19 vaccine.' },
+  { id: 4, title: 'Alzheimer Progression Biomarker Study', phase: 'Phase 2', location: 'Seattle, WA', description: 'Investigating novel biomarkers to track Alzheimer disease progression.' },
+  { id: 5, title: 'Chronic Pain Neuromodulation Trial', phase: 'Phase 3', location: 'Chicago, IL', description: 'Assessing a neuromodulation device for chronic lower-back pain relief.' },
+  { id: 6, title: 'Asthma Inhaler Efficacy Study', phase: 'Phase 2', location: 'Denver, CO', description: 'Testing improved inhaler formulations for symptomatic control in moderate asthma.' },
+  { id: 7, title: 'Rheumatoid Arthritis New Agent', phase: 'Phase 3', location: 'Houston, TX', description: 'Efficacy and safety evaluation of a novel biologic therapy for RA.' },
+  { id: 8, title: 'Breast Cancer Adjuvant Therapy', phase: 'Phase 4', location: 'Los Angeles, CA', description: 'Post-marketing analysis of long-term outcomes for adjuvant therapy.' },
+  { id: 9, title: 'Osteoporosis Bone Density Trial', phase: 'Phase 3', location: 'Minneapolis, MN', description: 'Studying a new treatment to increase bone mineral density and reduce fracture risk.' },
+  { id: 10, title: 'Migraine Preventative Study', phase: 'Phase 1', location: 'Philadelphia, PA', description: 'Early safety and tolerability study of an experimental migraine preventive agent.' },
+  { id: 11, title: 'Parkinson Symptom Management Study', phase: 'Phase 3', location: 'San Diego, CA', description: 'Evaluating a therapy to reduce motor fluctuations in Parkinson disease.' },
+  { id: 12, title: 'Depression Digital Therapeutic Trial', phase: 'Phase 2', location: 'Austin, TX', description: 'Testing a digital therapeutic app for moderate depression as adjunctive care.' },
+  { id: 13, title: 'Cholesterol Reduction Combination Study', phase: 'Phase 4', location: 'Phoenix, AZ', description: 'Real-world outcomes for a combination lipid-lowering regimen.' },
+  { id: 14, title: 'Hepatitis C Treatment Optimization', phase: 'Phase 3', location: 'Atlanta, GA', description: 'Comparing shorter-course regimens for sustained virologic response.' },
+  { id: 15, title: 'Pediatric Vaccination Safety Study', phase: 'Phase 2', location: 'Columbus, OH', description: 'Assessing safety and immune response of a pediatric vaccine candidate.' },
+  { id: 16, title: 'Multiple Sclerosis Remission Trial', phase: 'Phase 3', location: 'Cleveland, OH', description: 'Investigating a maintenance therapy to prolong remission in MS.' },
+  { id: 17, title: 'Influenza Next-Gen Vaccine Study', phase: 'Phase 4', location: 'Orlando, FL', description: 'Surveillance and effectiveness study for a next-generation influenza vaccine.' },
+  { id: 18, title: 'Obesity Metabolic Intervention', phase: 'Phase 3', location: 'Nashville, TN', description: 'Evaluating a metabolic intervention combined with lifestyle counseling for weight loss.' },
+  { id: 19, title: 'Dermatology Topical Agent Study', phase: 'Phase 1', location: 'Portland, OR', description: 'Initial safety assessment of a topical agent for inflammatory skin disease.' },
+  { id: 20, title: 'Chronic Kidney Disease Progression Study', phase: 'Phase 3', location: 'Detroit, MI', description: 'Testing a therapeutic approach to slow CKD progression in adults.' },
+  { id: 21, title: 'Sleep Apnea Device Trial', phase: 'Phase 2', location: 'San Antonio, TX', description: 'Pilot study of a new mandibular advancement device for obstructive sleep apnea.' },
+  { id: 22, title: 'Ovarian Cancer Maintenance Therapy', phase: 'Phase 3', location: 'Richmond, VA', description: 'Evaluating maintenance therapy to extend disease-free survival.' },
+  { id: 23, title: 'Rare Genetic Disorder Natural History', phase: 'Phase 4', location: 'Raleigh, NC', description: 'Observational study documenting the natural history of a rare genetic condition.' }
 ]
 
 function TrialCard({ trial, onView }) {
@@ -129,6 +129,7 @@ export default function App() {
             <div className="modal-body">
               <p><strong>Location:</strong> {modalTrial.location}</p>
               <p><strong>Phase:</strong> {modalTrial.phase}</p>
+              {modalTrial.description && <p style={{marginTop:8}}>{modalTrial.description}</p>}
             </div>
             <div className="modal-actions">
               <button className="btn secondary" onClick={() => setModalTrial(null)}>Close</button>

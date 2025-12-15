@@ -173,6 +173,7 @@
                         <div className="modal-body">
                           <p><strong>Location:</strong> {modalTrial.location}</p>
                           <p><strong>Phase:</strong> {modalTrial.phase}</p>
+                          {modalTrial.description && <p style={{marginTop:8}}>{modalTrial.description}</p>}
                         </div>
                         <div className="modal-actions"><button className="btn secondary" onClick={() => setModalTrial(null)}>Close</button></div>
                       </div>
