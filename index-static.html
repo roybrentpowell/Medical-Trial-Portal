@@ -34,8 +34,8 @@
       return (
           <div className="card">
             <div className="card-head">
-              <h3>{trial.title}</h3>
-              <span className={`badge ${phaseClass}`}>{trial.phase}</span>
+              <h3 style={{flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: 0}}>{trial.title}</h3>
+              <span className={`badge ${phaseClass}`} style={{whiteSpace: 'nowrap', flexShrink: 0}}>{trial.phase}</span>
             </div>
 
             <div className="meta">📍 {trial.location}</div>
