@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 
 const SAMPLE_TRIALS = [
   { id: 1, title: 'Diabetes Glucose Control Study', phase: 'Phase 2', location: 'New York, NY' },
@@ -26,7 +26,7 @@ const SAMPLE_TRIALS = [
   { id: 23, title: 'Rare Genetic Disorder Natural History', phase: 'Phase 4', location: 'Raleigh, NC' }
 ]
 
-function TrialCard({ trial }) {
+function TrialCard({ trial, onView }) {
   const p = trial.phase.toLowerCase()
   const phaseClass = p.includes('1') ? 'phase-1' : p.includes('2') ? 'phase-2' : p.includes('3') ? 'phase-3' : 'phase-4'
 
@@ -45,6 +45,7 @@ function TrialCard({ trial }) {
 
       <div className="cta">
         <button className="btn">Apply</button>
+        <button className="btn secondary" onClick={() => onView && onView(trial)}>View Details</button>
       </div>
     </div>
   )
@@ -53,6 +54,7 @@ function TrialCard({ trial }) {
 export default function App() {
   const [query, setQuery] = useState('')
   const [phaseFilter, setPhaseFilter] = useState('')
+  const [modalTrial, setModalTrial] = useState(null)
 
   const trials = useMemo(() => SAMPLE_TRIALS, [])
 
@@ -61,6 +63,14 @@ export default function App() {
     const matchesPhase = phaseFilter === '' || t.phase === phaseFilter
     return matchesQuery && matchesPhase
   })
+
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === 'Escape') setModalTrial(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <div className="container">
@@ -104,11 +114,28 @@ export default function App() {
         ) : (
           <div className="grid">
             {filtered.map(t => (
-              <TrialCard key={t.id} trial={t} />
+              <TrialCard key={t.id} trial={t} onView={t => setModalTrial(t)} />
             ))}
           </div>
         )}
       </main>
+
+      {modalTrial && (
+        <div className="modal-overlay" role="dialog" aria-modal="true">
+          <div className="modal">
+            <header className="modal-header">
+              <h3>{modalTrial.title}</h3>
+            </header>
+            <div className="modal-body">
+              <p><strong>Location:</strong> {modalTrial.location}</p>
+              <p><strong>Phase:</strong> {modalTrial.phase}</p>
+            </div>
+            <div className="modal-actions">
+              <button className="btn secondary" onClick={() => setModalTrial(null)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="app-footer" />
     </div>

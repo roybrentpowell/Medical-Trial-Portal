@@ -78,3 +78,11 @@ footer.app-footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:c
 /* Ensure cards expand to fill height in a row for balanced layout */
 .card{display:flex;flex-direction:column}
 .card .cta{margin-top:auto}
+
+/* Modal styles */
+.modal-overlay{position:fixed;inset:0;background:rgba(4,17,30,0.45);display:flex;align-items:center;justify-content:center;z-index:1200}
+.modal{background:var(--card);padding:18px;border-radius:10px;max-width:520px;width:94%;box-shadow:0 12px 36px rgba(4,17,30,0.25)}
+.modal-header h3{margin:0 0 8px}
+.modal-body{color:var(--muted);font-size:15px}
+.modal-actions{display:flex;justify-content:flex-end;margin-top:12px}
+.modal .btn.secondary{border:1px solid rgba(11,118,239,0.12);background:transparent}

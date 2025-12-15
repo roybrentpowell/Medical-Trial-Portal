@@ -4,157 +4,187 @@
     <style>
       html, body {height:100%;}
       body {min-height:100vh;margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#eef5ff 0%,#f3f6fb 100%);color:#082136}
-      #root{min-height:100vh;display:flex;flex-direction:column}
-      .container{width:100%;max-width:1400px;margin:0 auto;padding:clamp(12px,2.5vw,36px);box-sizing:border-box;display:flex;flex-direction:column;min-height:100vh}
-      .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start}
-      main{flex:1;display:flex;flex-direction:column}
-      .grid{flex:0 0 auto}
-      .hero, .topnav{width:100%}
-      .card{display:flex;flex-direction:column}
-      .card .cta{margin-top:auto}
-      .card-head h3{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0}
-      .badge{white-space:nowrap;flex-shrink:0}
-      @media (max-width:700px){ .grid{grid-template-columns:1fr} .nav-search{display:none} }
-    </style>
-    <script type="text/babel">
-      const SAMPLE_TRIALS = [
-        { id: 1, title: 'Diabetes Glucose Control Study', phase: 'Phase 2', location: 'New York, NY' },
-        { id: 2, title: 'Hypertension Medication Trial', phase: 'Phase 3', location: 'Boston, MA' },
-        { id: 3, title: 'COVID-19 Vaccine Follow-up', phase: 'Phase 4', location: 'San Francisco, CA' },
-        { id: 4, title: 'Alzheimer Progression Biomarker Study', phase: 'Phase 2', location: 'Seattle, WA' },
-        { id: 5, title: 'Chronic Pain Neuromodulation Trial', phase: 'Phase 3', location: 'Chicago, IL' },
-        { id: 6, title: 'Asthma Inhaler Efficacy Study', phase: 'Phase 2', location: 'Denver, CO' },
-        { id: 7, title: 'Rheumatoid Arthritis New Agent', phase: 'Phase 3', location: 'Houston, TX' },
-        { id: 8, title: 'Breast Cancer Adjuvant Therapy', phase: 'Phase 4', location: 'Los Angeles, CA' },
-        { id: 9, title: 'Osteoporosis Bone Density Trial', phase: 'Phase 3', location: 'Minneapolis, MN' },
-        { id: 10, title: 'Migraine Preventative Study', phase: 'Phase 1', location: 'Philadelphia, PA' },
-        { id: 11, title: 'Parkinson Symptom Management Study', phase: 'Phase 3', location: 'San Diego, CA' },
-        { id: 12, title: 'Depression Digital Therapeutic Trial', phase: 'Phase 2', location: 'Austin, TX' },
-        { id: 13, title: 'Cholesterol Reduction Combination Study', phase: 'Phase 4', location: 'Phoenix, AZ' },
-        { id: 14, title: 'Hepatitis C Treatment Optimization', phase: 'Phase 3', location: 'Atlanta, GA' },
-        { id: 15, title: 'Pediatric Vaccination Safety Study', phase: 'Phase 2', location: 'Columbus, OH' },
-        { id: 16, title: 'Multiple Sclerosis Remission Trial', phase: 'Phase 3', location: 'Cleveland, OH' },
-        { id: 17, title: 'Influenza Next-Gen Vaccine Study', phase: 'Phase 4', location: 'Orlando, FL' },
-        { id: 18, title: 'Obesity Metabolic Intervention', phase: 'Phase 3', location: 'Nashville, TN' },
-        { id: 19, title: 'Dermatology Topical Agent Study', phase: 'Phase 1', location: 'Portland, OR' },
-        { id: 20, title: 'Chronic Kidney Disease Progression Study', phase: 'Phase 3', location: 'Detroit, MI' },
-        { id: 21, title: 'Sleep Apnea Device Trial', phase: 'Phase 2', location: 'San Antonio, TX' },
-        { id: 22, title: 'Ovarian Cancer Maintenance Therapy', phase: 'Phase 3', location: 'Richmond, VA' },
-        { id: 23, title: 'Rare Genetic Disorder Natural History', phase: 'Phase 4', location: 'Raleigh, NC' }
-      ];
-
-      function TrialCard({ trial }) {
-      const p = trial.phase.toLowerCase();
-      const phaseClass = p.includes('1') ? 'phase-1' : p.includes('2') ? 'phase-2' : p.includes('3') ? 'phase-3' : 'phase-4'
-      return (
-          <div className="card">
-            <div className="card-head">
-              <h3 style={{flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: 0}}>{trial.title}</h3>
-              <span className={`badge ${phaseClass}`} style={{whiteSpace: 'nowrap', flexShrink: 0}}>{trial.phase}</span>
-            </div>
-
-            <div className="meta">📍 {trial.location}</div>
-
-            <p className="desc"></p>
-
-            <div className="cta">
-              <button className="btn">Apply</button>
+      <!doctype html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <title>Medical Trials Portal (static)</title>
+          <style>
+            html, body {height:100%;}
+            body {min-height:100vh;margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#eef5ff 0%,#f3f6fb 100%);color:#082136}
+            #root{min-height:100vh;display:flex;flex-direction:column}
+            .container{width:100%;max-width:1400px;margin:0 auto;padding:clamp(12px,2.5vw,36px);box-sizing:border-box;display:flex;flex-direction:column;min-height:100vh}
+            .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start}
+            main{flex:1;display:flex;flex-direction:column}
+            .grid{flex:0 0 auto}
+            .hero, .topnav{width:100%}
+            .card{display:flex;flex-direction:column;background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 6px rgba(11,118,239,0.06)}
+            .card .cta{margin-top:auto;display:flex;gap:8px}
+            .card-head{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+            .card-head h3{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0}
+            .badge{white-space:nowrap;flex-shrink:0;padding:6px 8px;border-radius:999px;font-size:12px;background:#eef3ff;color:#0b5ed7}
+            .meta{color:#365a79;font-size:13px;margin-bottom:8px}
+            .desc{color:#4a6578;font-size:14px;margin:0 0 8px}
+            .btn{background:#0b76ef;color:#fff;border:0;padding:8px 12px;border-radius:6px;cursor:pointer}
+            .btn.secondary{background:#fff;color:#0b76ef;border:1px solid #dceefe}
+            nav.topnav{display:flex;align-items:center;gap:12px;padding:12px 0}
+            .nav-title{font-weight:600;color:#08304c}
+            .nav-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+            .nav-search{padding:8px;border-radius:6px;border:1px solid #e6eef9}
+            .avatar{background:#072a4a;color:#fff;padding:8px;border-radius:6px}
+            .hero{display:flex;justify-content:space-between;align-items:center;margin:18px 0}
+            .pill{background:#f1f7ff;padding:6px 10px;border-radius:999px;color:#0b76ef}
+            @media (max-width:700px){ .grid{grid-template-columns:1fr} .nav-search{display:none} }
+            /* modal */
+            .modal-overlay{position:fixed;inset:0;background:rgba(4,17,30,0.45);display:flex;align-items:center;justify-content:center;z-index:1200}
+            .modal{background:#fff;padding:18px;border-radius:10px;max-width:520px;width:94%;box-shadow:0 12px 36px rgba(4,17,30,0.25)}
+            .modal-header h3{margin:0 0 8px}
+            .modal-body{color:#365a79;font-size:15px}
+            .modal-actions{display:flex;justify-content:flex-end;margin-top:12px}
+          </style>
+          <!-- React + ReactDOM UMD builds and Babel for in-browser JSX -->
+          <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+          <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+          <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        </head>
+        <body>
+          <div id="root">
+            <div class="container">
+              <p>Loading app…</p>
             </div>
           </div>
-        );
-      }
 
-      function App() {
-        const [query, setQuery] = React.useState('');
-        const [phaseFilter, setPhaseFilter] = React.useState('');
+          <script type="text/babel">
+            const SAMPLE_TRIALS = [
+              { id: 1, title: 'Diabetes Glucose Control Study', phase: 'Phase 2', location: 'New York, NY', description: 'Evaluates glucose control strategies and device monitoring in adults with Type 2 diabetes.' },
+              { id: 2, title: 'Hypertension Medication Trial', phase: 'Phase 3', location: 'Boston, MA', description: 'Comparing a new antihypertensive combination against standard of care for blood pressure control.' },
+              { id: 3, title: 'COVID-19 Vaccine Follow-up', phase: 'Phase 4', location: 'San Francisco, CA', description: 'Long-term safety and effectiveness follow-up of an authorized COVID-19 vaccine.' },
+              { id: 4, title: 'Alzheimer Progression Biomarker Study', phase: 'Phase 2', location: 'Seattle, WA', description: 'Investigating novel biomarkers to track Alzheimer disease progression.' },
+              { id: 5, title: 'Chronic Pain Neuromodulation Trial', phase: 'Phase 3', location: 'Chicago, IL', description: 'Assessing a neuromodulation device for chronic lower-back pain relief.' },
+              { id: 6, title: 'Asthma Inhaler Efficacy Study', phase: 'Phase 2', location: 'Denver, CO', description: 'Testing improved inhaler formulations for symptomatic control in moderate asthma.' },
+              { id: 7, title: 'Rheumatoid Arthritis New Agent', phase: 'Phase 3', location: 'Houston, TX', description: 'Efficacy and safety evaluation of a novel biologic therapy for RA.' },
+              { id: 8, title: 'Breast Cancer Adjuvant Therapy', phase: 'Phase 4', location: 'Los Angeles, CA', description: 'Post-marketing analysis of long-term outcomes for adjuvant therapy.' },
+              { id: 9, title: 'Osteoporosis Bone Density Trial', phase: 'Phase 3', location: 'Minneapolis, MN', description: 'Studying a new treatment to increase bone mineral density and reduce fracture risk.' },
+              { id: 10, title: 'Migraine Preventative Study', phase: 'Phase 1', location: 'Philadelphia, PA', description: 'Early safety and tolerability study of an experimental migraine preventive agent.' },
+              { id: 11, title: 'Parkinson Symptom Management Study', phase: 'Phase 3', location: 'San Diego, CA', description: 'Evaluating a therapy to reduce motor fluctuations in Parkinson disease.' },
+              { id: 12, title: 'Depression Digital Therapeutic Trial', phase: 'Phase 2', location: 'Austin, TX', description: 'Testing a digital therapeutic app for moderate depression as adjunctive care.' },
+              { id: 13, title: 'Cholesterol Reduction Combination Study', phase: 'Phase 4', location: 'Phoenix, AZ', description: 'Real-world outcomes for a combination lipid-lowering regimen.' },
+              { id: 14, title: 'Hepatitis C Treatment Optimization', phase: 'Phase 3', location: 'Atlanta, GA', description: 'Comparing shorter-course regimens for sustained virologic response.' },
+              { id: 15, title: 'Pediatric Vaccination Safety Study', phase: 'Phase 2', location: 'Columbus, OH', description: 'Assessing safety and immune response of a pediatric vaccine candidate.' },
+              { id: 16, title: 'Multiple Sclerosis Remission Trial', phase: 'Phase 3', location: 'Cleveland, OH', description: 'Investigating a maintenance therapy to prolong remission in MS.' },
+              { id: 17, title: 'Influenza Next-Gen Vaccine Study', phase: 'Phase 4', location: 'Orlando, FL', description: 'Surveillance and effectiveness study for a next-generation influenza vaccine.' },
+              { id: 18, title: 'Obesity Metabolic Intervention', phase: 'Phase 3', location: 'Nashville, TN', description: 'Evaluating a metabolic intervention combined with lifestyle counseling for weight loss.' },
+              { id: 19, title: 'Dermatology Topical Agent Study', phase: 'Phase 1', location: 'Portland, OR', description: 'Initial safety assessment of a topical agent for inflammatory skin disease.' },
+              { id: 20, title: 'Chronic Kidney Disease Progression Study', phase: 'Phase 3', location: 'Detroit, MI', description: 'Testing a therapeutic approach to slow CKD progression in adults.' },
+              { id: 21, title: 'Sleep Apnea Device Trial', phase: 'Phase 2', location: 'San Antonio, TX', description: 'Pilot study of a new mandibular advancement device for obstructive sleep apnea.' },
+              { id: 22, title: 'Ovarian Cancer Maintenance Therapy', phase: 'Phase 3', location: 'Richmond, VA', description: 'Evaluating maintenance therapy to extend disease-free survival.' },
+              { id: 23, title: 'Rare Genetic Disorder Natural History', phase: 'Phase 4', location: 'Raleigh, NC', description: 'Observational study documenting the natural history of a rare genetic condition.' }
+            ];
 
-        const filtered = SAMPLE_TRIALS.filter(t => {
-          const matchesQuery = query === '' || t.title.toLowerCase().includes(query.toLowerCase());
-          const matchesPhase = phaseFilter === '' || t.phase === phaseFilter;
-          return matchesQuery && matchesPhase;
-        });
-
-        return (
-          <div>
-            <nav className="topnav">
-              <div className="logo">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="2" width="20" height="20" rx="4" fill="#0b76ef" />
-                  <path d="M7 12h10M12 7v10" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div className="nav-title">Medical Trials Portal</div>
-              <div className="nav-actions">
-                <input className="nav-search" placeholder="Search trials..." value={query} onChange={e => setQuery(e.target.value)} />
-                <div className="avatar">BP</div>
-              </div>
-            </nav>
-
-            <div className="hero">
-              <div className="summary">
-                <h2>Find relevant clinical trials near you</h2>
-                <p>Search, filter, and express interest in clinical studies.</p>
-              </div>
-              <div className="actions">
-                <div className="pill">Trials: {SAMPLE_TRIALS.length}</div>
-              </div>
-            </div>
-
-            <section className="controls">
-              <select value={phaseFilter} onChange={e => setPhaseFilter(e.target.value)}>
-                <option value="">All phases</option>
-                <option>Phase 1</option>
-                <option>Phase 2</option>
-                <option>Phase 3</option>
-                <option>Phase 4</option>
-              </select>
-            </section>
-
-            <main>
-              {filtered.length === 0 ? (
-                <p>No trials match your search.</p>
-              ) : (
-                <div className="grid">
-                  {filtered.map(t => <TrialCard key={t.id} trial={t} />)}
+            function TrialCard({ trial, onView }) {
+              const p = trial.phase.toLowerCase();
+              const phaseClass = p.includes('1') ? 'phase-1' : p.includes('2') ? 'phase-2' : p.includes('3') ? 'phase-3' : 'phase-4';
+              return (
+                <div className="card">
+                  <div className="card-head">
+                    <h3>{trial.title}</h3>
+                    <span className={`badge ${phaseClass}`}>{trial.phase}</span>
+                  </div>
+                  <div className="meta">📍 {trial.location}</div>
+                  <p className="desc">{trial.description}</p>
+                  <div className="cta">
+                    <button className="btn">Apply</button>
+                    <button className="btn secondary" onClick={() => onView && onView(trial)}>View Details</button>
+                  </div>
                 </div>
-              )}
-            </main>
+              );
+            }
 
-            <footer className="app-footer"></footer>
-          </div>
-        );
-      }
+            function App() {
+              const [query, setQuery] = React.useState('');
+              const [phaseFilter, setPhaseFilter] = React.useState('');
+              const [modalTrial, setModalTrial] = React.useState(null);
 
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<App />);
-    </script>
-            <section className="controls">
-              <input placeholder="Search trials by name" value={query} onChange={e => setQuery(e.target.value)} />
-              <select value={phaseFilter} onChange={e => setPhaseFilter(e.target.value)}>
-                <option value="">All phases</option>
-                <option>Phase 2</option>
-                <option>Phase 3</option>
-                <option>Phase 4</option>
-              </select>
-            </section>
+              React.useEffect(() => {
+                function onKey(e) { if (e.key === 'Escape') setModalTrial(null) }
+                window.addEventListener('keydown', onKey)
+                return () => window.removeEventListener('keydown', onKey)
+              }, [])
 
-            <main>
-              {filtered.length === 0 ? (
-                <p>No trials match your search.</p>
-              ) : (
-                <div className="grid">
-                  {filtered.map(t => <TrialCard key={t.id} trial={t} />)}
+              const filtered = SAMPLE_TRIALS.filter(t => {
+                const matchesQuery = query === '' || t.title.toLowerCase().includes(query.toLowerCase());
+                const matchesPhase = phaseFilter === '' || t.phase === phaseFilter;
+                return matchesQuery && matchesPhase;
+              });
+
+              return (
+                <div className="container">
+                  <nav className="topnav">
+                    <div className="logo">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="20" height="20" rx="4" fill="#0b76ef" />
+                        <path d="M7 12h10M12 7v10" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    <div className="nav-title">Medical Trials Portal</div>
+                    <div className="nav-actions">
+                      <input className="nav-search" placeholder="Search trials..." value={query} onChange={e => setQuery(e.target.value)} />
+                      <div className="avatar">BP</div>
+                    </div>
+                  </nav>
+
+                  <div className="hero">
+                    <div className="summary">
+                      <h2>Find relevant clinical trials near you</h2>
+                      <p>Search, filter, and express interest in clinical studies.</p>
+                    </div>
+                    <div className="actions">
+                      <div className="pill">Trials: {SAMPLE_TRIALS.length}</div>
+                    </div>
+                  </div>
+
+                  <section className="controls">
+                    <select value={phaseFilter} onChange={e => setPhaseFilter(e.target.value)}>
+                      <option value="">All phases</option>
+                      <option>Phase 1</option>
+                      <option>Phase 2</option>
+                      <option>Phase 3</option>
+                      <option>Phase 4</option>
+                    </select>
+                  </section>
+
+                  <main>
+                    {filtered.length === 0 ? (
+                      <p>No trials match your search.</p>
+                    ) : (
+                      <div className="grid">
+                        {filtered.map(t => <TrialCard key={t.id} trial={t} onView={t => setModalTrial(t)} />)}
+                      </div>
+                    )}
+                  </main>
+
+                  <footer className="app-footer" style={{marginTop:20}}></footer>
+
+                  {modalTrial && (
+                    <div className="modal-overlay" role="dialog" aria-modal="true">
+                      <div className="modal">
+                        <header className="modal-header"><h3>{modalTrial.title}</h3></header>
+                        <div className="modal-body">
+                          <p><strong>Location:</strong> {modalTrial.location}</p>
+                          <p><strong>Phase:</strong> {modalTrial.phase}</p>
+                        </div>
+                        <div className="modal-actions"><button className="btn secondary" onClick={() => setModalTrial(null)}>Close</button></div>
+                      </div>
+                    </div>
+                  )}
+
                 </div>
-              )}
-            </main>
+              );
+            }
 
-            <footer class="app-footer"></footer>
-          </div>
-        );
-      }
-
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<App />);
-    </script>
-  </body>
-</html>
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(<App />);
+          </script>
+        </body>
+      </html>
