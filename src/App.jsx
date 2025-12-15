@@ -45,7 +45,6 @@ function TrialCard({ trial }) {
 
       <div className="cta">
         <button className="btn">Apply</button>
-        <button className="btn secondary">View details</button>
       </div>
     </div>
   )
