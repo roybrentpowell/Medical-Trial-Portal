@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+      html, body {height:100%;}
+      body {min-height:100vh;margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#eef5ff 0%,#f3f6fb 100%);color:#082136}
+      .container{width:100%;max-width:1200px;margin:0 auto;padding:24px;box-sizing:border-box}
+      .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start}
+      .hero, .topnav{width:100%}
+      .card{display:flex;flex-direction:column}
+      .card .cta{margin-top:auto}
+      .card-head h3{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0}
+      .badge{white-space:nowrap;flex-shrink:0}
+      @media (max-width:700px){ .grid{grid-template-columns:1fr} .nav-search{display:none} }
+    </style>
     <script type="text/babel">
       const SAMPLE_TRIALS = [
         { id: 1, title: 'Diabetes Glucose Control Study', phase: 'Phase 2', location: 'New York, NY' },
