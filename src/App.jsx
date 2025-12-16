@@ -26,7 +26,7 @@ const SAMPLE_TRIALS = [
   { id: 23, title: 'Rare Genetic Disorder Natural History', phase: 'Phase 4', location: 'Raleigh, NC', description: 'Observational study documenting the natural history of a rare genetic condition.' }
 ]
 
-function TrialCard({ trial, onView }) {
+function TrialCard({ trial, onView, isBookmarked, onToggleBookmark }) {
   const p = trial.phase.toLowerCase()
   const phaseClass = p.includes('1') ? 'phase-1' : p.includes('2') ? 'phase-2' : p.includes('3') ? 'phase-3' : 'phase-4'
 
@@ -34,7 +34,26 @@ function TrialCard({ trial, onView }) {
     <div className="card">
       <div className="card-head">
         <h3>{trial.title}</h3>
-        <span className={`badge ${phaseClass}`}>{trial.phase}</span>
+        <div className="card-actions">
+          <button
+            type="button"
+            className="icon-btn bookmark-btn"
+            aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark trial'}
+            aria-pressed={isBookmarked}
+            onClick={onToggleBookmark}
+          >
+            {isBookmarked ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z" fill="currentColor"/>
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+              </svg>
+            )}
+          </button>
+          <span className={`badge ${phaseClass}`}>{trial.phase}</span>
+        </div>
       </div>
 
       <div className="meta">
@@ -55,6 +74,24 @@ export default function App() {
   const [query, setQuery] = useState('')
   const [phaseFilter, setPhaseFilter] = useState('')
   const [modalTrial, setModalTrial] = useState(null)
+
+  const [bookmarkedIds, setBookmarkedIds] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('bookmarkedTrials')) || []
+    } catch {
+      return []
+    }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('bookmarkedTrials', JSON.stringify(bookmarkedIds))
+    } catch {}
+  }, [bookmarkedIds])
+
+  const toggleBookmark = (id) => {
+    setBookmarkedIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id])
+  }
 
   const trials = useMemo(() => SAMPLE_TRIALS, [])
 
@@ -114,7 +151,13 @@ export default function App() {
         ) : (
           <div className="grid">
             {filtered.map(t => (
-              <TrialCard key={t.id} trial={t} onView={t => setModalTrial(t)} />
+              <TrialCard
+                key={t.id}
+                trial={t}
+                isBookmarked={bookmarkedIds.includes(t.id)}
+                onToggleBookmark={() => toggleBookmark(t.id)}
+                onView={t => setModalTrial(t)}
+              />
             ))}
           </div>
         )}

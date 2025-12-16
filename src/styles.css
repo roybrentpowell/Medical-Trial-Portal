@@ -86,3 +86,10 @@ footer.app-footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:c
 .modal-body{color:var(--muted);font-size:15px}
 .modal-actions{display:flex;justify-content:flex-end;margin-top:12px}
 .modal .btn.secondary{border:1px solid rgba(11,118,239,0.12);background:transparent}
+
+/* Trial card bookmark UI (AUAT-12391) */
+.card-actions{display:flex;gap:6px;align-items:center}
+.icon-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid rgba(11,118,239,0.12);background:rgba(255,255,255,0.9);color:#9aa9c6;cursor:pointer;padding:0}
+.icon-btn svg{pointer-events:none}
+.icon-btn:hover,.icon-btn:focus-visible{border-color:rgba(11,118,239,0.25);color:var(--accent);outline:none}
+.bookmark-btn[aria-pressed="true"]{color:var(--accent);background:linear-gradient(180deg,rgba(11,118,239,0.10),rgba(11,118,239,0.04))}
